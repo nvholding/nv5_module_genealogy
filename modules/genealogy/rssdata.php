@@ -2,10 +2,10 @@
 
 /**
  * @Project NUKEVIET 4.x
- * @Author VINADES (contact@vinades.vn)
- * @Copyright (C) 2014 VINADES. All rights reserved
+ * @Author NV Holding (ceo@nvholding.vn)
+ * @Copyright (C) 2020 NV Holding. All rights reserved
  * @License GNU/GPL version 2 or any later version
- * @Createdate Apr 20, 2010 10:47:41 AM
+ * @Createdate 01/01/2020 00:00
  */
 
 if( ! defined( 'NV_IS_MOD_RSS' ) ) die( 'Stop!!!' );

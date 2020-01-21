@@ -1,10 +1,11 @@
 <?php
 
 /**
- * @Project NUKEVIET 3
- * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2010 VINADES., JSC. All rights reserved
- * @Createdate 24/8/2011 23:25
+ * @Project NUKEVIET 4.x
+ * @Author NV Holding (ceo@nvholding.vn)
+ * @Copyright (C) 2020 NV Holding. All rights reserved
+ * @License GNU/GPL version 2 or any later version
+ * @Createdate 01/01/2020 00:00
  */
 
 if (!defined('NV_MAINFILE'))
