@@ -17,7 +17,7 @@ $module_version = array(
 	'submenu' => 'content,rss,search',
 	'is_sysmod' => 0, // 1:0 => Co phai la module he thong hay khong
 	'virtual' => 1, // 1:0 => Co cho phep ao hao module hay khong
-	'version' => '4.0.0', // Phien ban cua modle
+	'version' => '5.0.0', // Phien ban cua modle
 	'date' => 'Wed, 01 Jan 2020 00:00:00 GMT', // Ngay phat hanh phien ban
 	'author' => 'NV Holding (ceo@nvholding.vn)', // Tac gia
 	'note' => '', // Ghi chu
