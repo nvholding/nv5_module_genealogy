@@ -194,7 +194,7 @@ if( !empty( $savefam ) )
 				$db->query( 'INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_admins (userid, fid, admin, add_content, pub_content, edit_content, del_content) VALUES (' . $admin_id . ', ' . $newfid . ', 1, 1, 1, 1, 1)' );
 			}
 
-			nv_del_moduleCache( $module_name );
+			$nv_Cache->delMod( $module_name );
 			nv_insert_logs( NV_LANG_DATA, $module_name, $lang_module['add_fam'], $title, $admin_info['userid'] );
 			Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op . '&parentid=' . $parentid );
 			die();
@@ -234,7 +234,7 @@ if( !empty( $savefam ) )
 				nv_insert_logs( NV_LANG_DATA, $module_name, $lang_module['edit_fam'], $title, $admin_info['userid'] );
 			}
 
-			nv_del_moduleCache( $module_name );
+			$nv_Cache->delMod( $module_name );
 			Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op . '&parentid=' . $parentid );
 			die();
 		}

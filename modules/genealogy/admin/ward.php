@@ -22,11 +22,11 @@ if( ! defined( 'NV_MODULE_LOCATION' ) ){
 $district = $nv_Request->get_int( 'districtid', 'get', '' );
 $ward = $nv_Request->get_int( 'wardid', 'get', '' );
 	// ward
-$sql = 'SELECT ward_id, district_id, city_id, title, type FROM ' . $db_config['prefix'] . '_' . NV_LANG_DATA . '_location_ward WHERE status=1 AND district_id = '.$district.' ORDER BY weight ASC';
-$global_array_location_district_ward = nv_db_cache($sql, 'ward_id', 'location' );
+$sql = 'SELECT wardid, districtid, title, type FROM ' . $db_config['prefix'] . '_location_ward WHERE status=1 AND districtid = '.$district.' ORDER BY wardid ASC';
+$global_array_location_district_ward = $nv_Cache->db($sql, 'wardid', 'location' );
 include NV_ROOTDIR . '/includes/header.php';
 foreach( $global_array_location_district_ward as $ward_i =>  $rowsward ){
 	$rowsward['selected'] = ($ward_i == $ward) ? ' selected="selected"' : '';
-	echo '<option value="'.$rowsward['ward_id'].'" '.$rowsward['selected'].'>'.$rowsward['type']. ' '. $rowsward['title'].'</option>';
+	echo '<option value="'.$rowsward['wardid'].'" '.$rowsward['selected'].'>'.$rowsward['type']. ' '. $rowsward['title'].'</option>';
 }
 include NV_ROOTDIR . '/includes/footer.php';

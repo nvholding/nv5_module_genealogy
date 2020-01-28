@@ -1078,25 +1078,6 @@ if( empty( $rowcontent['alias'] ) )
 $xtpl->assign( 'UPLOADS_DIR_USER', $uploads_dir_user );
 $xtpl->assign( 'UPLOAD_CURRENT', $currentpath );
 
-$sql = 'SELECT * FROM ' . $db_config['prefix'] . '_googleplus ORDER BY weight ASC';
-$_array = $db->query( $sql )->fetchAll();
-if( sizeof( $_array ) )
-{
-	$array_googleplus = array();
-	$array_googleplus[] = array( 'gid' => -1, 'title' => $lang_module['googleplus_1'] );
-	$array_googleplus[] = array( 'gid' => 0, 'title' => $lang_module['googleplus_0'] );
-	foreach( $_array as $row )
-	{
-		$array_googleplus[] = $row;
-	}
-	foreach( $array_googleplus as $grow )
-	{
-		$grow['selected'] = ( $rowcontent['gid'] == $grow['gid'] ) ? ' selected="selected"' : '';
-		$xtpl->assign( 'GOOGLEPLUS', $grow );
-		$xtpl->parse( 'main.googleplus.gid' );
-	}
-	$xtpl->parse( 'main.googleplus' );
-}
 
 if( $module_config[$module_name]['auto_tags'] )
 {

@@ -22,11 +22,11 @@ if( ! defined( 'NV_MODULE_LOCATION' ) ){
 $city = $nv_Request->get_int( 'cityid', 'get', '' );
 $district = $nv_Request->get_int( 'districtid', 'get', '' );
 	// district
-$sql = 'SELECT district_id, city_id, title,type FROM ' . $db_config['prefix'] . '_' . NV_LANG_DATA . '_location_district WHERE status=1 AND city_id = '.$city.' ORDER BY weight ASC';
-$global_array_location_city_district = nv_db_cache( $sql, 'district_id', 'location' );
+$sql = 'SELECT districtid, provinceid, title,type FROM ' . $db_config['prefix'] . '_location_district WHERE status=1 AND provinceid = '.$city.' ORDER BY weight ASC';
+$global_array_location_city_district = $nv_Cache->db( $sql, 'districtid', 'location' );
 include NV_ROOTDIR . '/includes/header.php';
 foreach( $global_array_location_city_district as $district_i =>  $rowsdistrict ){
 	$rowsdistrict['selected'] = ($district_i == $district) ? ' selected="selected"' : '';
-	echo '<option value="'.$rowsdistrict['district_id'].'" '.$rowsdistrict['selected'].'>'.$rowsdistrict['type']. ' '. $rowsdistrict['title'].'</option>';
+	echo '<option value="'.$rowsdistrict['districtid'].'" '.$rowsdistrict['selected'].'>'.$rowsdistrict['type']. ' '. $rowsdistrict['title'].'</option>';
 }
 include NV_ROOTDIR . '/includes/footer.php';

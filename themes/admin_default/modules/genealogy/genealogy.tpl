@@ -125,7 +125,7 @@
 											<td>
 												<select class="form-control" name="cityid" id="cityid">
 												<!-- BEGIN: city -->
-													<option value="{CITY.city_id}" {CITY.selected}>{CITY.title}</option>
+													<option value="{CITY.provinceid}" {CITY.selected}>{CITY.title}</option>
 												<!-- END: city -->
 												</select>
 											</td>
@@ -399,7 +399,7 @@ $("#idtitle").change(function() {
 			return;
         });
         // Set the default country code to the United States (US).
-        $("select[name='cityid']").val('79').change();
+        $("select[name='cityid']").val('50').change();
 		var district = $('select[name=districtid]');
         district.unbind('change');
         district.change(function() {
