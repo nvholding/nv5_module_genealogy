@@ -47,7 +47,7 @@
     	</div>
 	</div>
 	<div id="banners">
-           <img src="//www.nguyenvan.vn/themes/default/images/genealogy/bg-genealogy.jpg">
+           <img src="/themes/default/images/genealogy/bg-genealogy.jpg">
     </div>
 </div>
 

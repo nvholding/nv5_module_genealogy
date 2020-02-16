@@ -230,8 +230,10 @@
 				</div>
 				<!-- END: contextMenu -->
 			</div>
-			<div id="create_genealogy_users" style="overflow:auto;display:none;padding:10px;" title="Họ : Nguyễn Văn{PAGE_TITLE}">
+			<div id="create_genealogy_users" style="overflow:auto;padding:10px;" title="Họ : {PAGE_TITLE}">
 				<iframe id="modalIFrame" width="100%" height="100%" marginWidth="0" marginHeight="0" frameBorder="0" scrolling="auto"></iframe>
+			</div>
+			<div id="UserModal">
 			</div>
 			<script type="text/javascript">
 				//<![CDATA[
@@ -314,14 +316,6 @@
 			<script type="text/javascript">
 				//<![CDATA[
 				$(document).ready(function() {
-					
-					$("div#create_genealogy_users").dialog({
-						autoOpen : false,
-						width : 800,
-						height : 500,
-						modal : true,
-						position : "center"
-					}).dialog("open");
 					$("#modalIFrame").attr('src', nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=users&gid={DATA.id}&parentid=0');
 				});
 				//]]>

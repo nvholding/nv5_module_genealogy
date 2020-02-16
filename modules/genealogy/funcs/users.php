@@ -178,7 +178,7 @@ if (defined('NV_IS_USER'))
 				//die($query);
                 $db->query($query);
                 nv_fix_genealogy_user($post['parentid']);
-                nv_del_moduleCache($module_name);
+                $nv_Cache->delMod($module_name);
 				$alias_family_tree=change_alias($lang_module['family_tree']);
 				$base_url_rewrite=nv_url_rewrite( NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $global_array_fam[$post_gid['fid']]['alias'] . '/' . $post_gid['alias'] . '/Manager' . $global_config['rewrite_exturl'], true );
                 echo '<script type="text/javascript">
@@ -204,7 +204,7 @@ if (defined('NV_IS_USER'))
                         $db->query($query);
                 }
                 nv_fix_genealogy_user($post['parentid']);
-                nv_del_moduleCache($module_name);
+                $nv_Cache->delMod($module_name);
 
                 $op2 = ($post['opanniversary']) ? "anniversary" : "shows";
 
