@@ -12,7 +12,7 @@ if( ! defined( 'NV_IS_MOD_GENEALOGY' ) ) die( 'Stop!!!' );
 if( ! defined( 'NV_MODULE_LOCATION' ) ){
 	$contents = '<p class="note_fam">' . $lang_module['note_location'] . '</p>';
 	include NV_ROOTDIR . '/includes/header.php';
-	echo nv_admin_theme( $contents );
+	echo nv_site_theme( $contents );
 	include NV_ROOTDIR . '/includes/footer.php';
 	die();
 	
