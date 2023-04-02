@@ -9,15 +9,15 @@
  */
 
 if( ! defined( 'NV_IS_MOD_GENEALOGY' ) ) die( 'Stop!!!' );
-if( ! defined( 'NV_MODULE_LOCATION' ) ){
+/* if( ! defined( 'NV_MODULE_LOCATION' ) ){
 	$contents = '<p class="note_fam">' . $lang_module['note_location'] . '</p>';
 	include NV_ROOTDIR . '/includes/header.php';
-	echo nv_admin_theme( $contents );
+	echo nv_site_theme( $contents );
 	include NV_ROOTDIR . '/includes/footer.php';
 	die();
 	
 	
-}
+} */
 
 
 $contents = '';
@@ -30,6 +30,8 @@ $alias_family_tree=change_alias($lang_module['family_tree']);
 $array_relationships = array(1 => $lang_module['u_relationships_1'], 2 => $lang_module['u_relationships_2'], 3 => $lang_module['u_relationships_3']);
 $array_gender = array(0 => $lang_module['u_gender_0'], 1 => $lang_module['u_gender_1'], 2 => $lang_module['u_gender_2']);
 $array_status = array(0 => $lang_module['u_status_0'], 1 => $lang_module['u_status_1'], 2 => $lang_module['u_status_2']);
+
+
 if( nv_user_in_groups( $global_array_fam[$fid]['groups_view'] ) )
 {
 

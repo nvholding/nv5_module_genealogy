@@ -21,11 +21,11 @@ if ($nv_Request->isset_request('change_status', 'post, get')) {
     $provinceid = $nv_Request->get_int('provinceid', 'post, get', 0);
     $content = 'NO_' . $provinceid;
     
-    $query = 'SELECT status FROM ' . $db_config['prefix'] . '_' . $module_data . '_province WHERE provinceid=' . $provinceid;
+    $query = 'SELECT status FROM ' . NV_PREFIXLANG . '_' . $module_data . '_province WHERE provinceid=' . $provinceid;
     $row = $db->query($query)->fetch();
     if (isset($row['status'])) {
         $status = ($row['status']) ? 0 : 1;
-        $query = 'UPDATE ' . $db_config['prefix'] . '_' . $module_data . '_province SET status=' . intval($status) . ' WHERE provinceid=' . $provinceid;
+        $query = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_province SET status=' . intval($status) . ' WHERE provinceid=' . $provinceid;
         $db->query($query);
         $content = 'OK_' . $provinceid;
     }
@@ -42,17 +42,17 @@ if ($nv_Request->isset_request('ajax_action', 'post')) {
     $new_vid = $nv_Request->get_int('new_vid', 'post', 0);
     $content = 'NO_' . $provinceid;
     if ($new_vid > 0) {
-        $sql = 'SELECT provinceid FROM ' . $db_config['prefix'] . '_' . $module_data . '_province WHERE provinceid!=' . $provinceid . ' AND countryid = ' . $countryid . ' ORDER BY weight ASC';
+        $sql = 'SELECT provinceid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_province WHERE provinceid!=' . $provinceid . ' AND countryid = ' . $countryid . ' ORDER BY weight ASC';
         $result = $db->query($sql);
         $weight = 0;
         while ($row = $result->fetch()) {
             ++ $weight;
             if ($weight == $new_vid)
                 ++ $weight;
-            $sql = 'UPDATE ' . $db_config['prefix'] . '_' . $module_data . '_province SET weight=' . $weight . ' WHERE provinceid=' . $row['provinceid'] . ' AND countryid=' . $countryid;
+            $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_province SET weight=' . $weight . ' WHERE provinceid=' . $row['provinceid'] . ' AND countryid=' . $countryid;
             $db->query($sql);
         }
-        $sql = 'UPDATE ' . $db_config['prefix'] . '_' . $module_data . '_province SET weight=' . $new_vid . ' WHERE provinceid=' . $provinceid . ' AND countryid=' . $countryid;
+        $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_province SET weight=' . $new_vid . ' WHERE provinceid=' . $provinceid . ' AND countryid=' . $countryid;
         $db->query($sql);
         $content = 'OK_' . $provinceid;
     }
@@ -69,17 +69,17 @@ if ($nv_Request->isset_request('delete_provinceid', 'get') and $nv_Request->isse
     $delete_checkss = $nv_Request->get_string('delete_checkss', 'get');
     if ($provinceid > 0 and $delete_checkss == md5($provinceid . NV_CACHE_PREFIX . $client_info['session_id'])) {
         $weight = 0;
-        $sql = 'SELECT weight FROM ' . $db_config['prefix'] . '_' . $module_data . '_province WHERE provinceid =' . $provinceid;
+        $sql = 'SELECT weight FROM ' . NV_PREFIXLANG . '_' . $module_data . '_province WHERE provinceid =' . $provinceid;
         $result = $db->query($sql);
         list ($weight) = $result->fetch(3);
         
-        $db->query('DELETE FROM ' . $db_config['prefix'] . '_' . $module_data . '_province  WHERE provinceid = ' . $provinceid . ' AND countryid=' . $countryid);
+        $db->query('DELETE FROM ' . NV_PREFIXLANG . '_' . $module_data . '_province  WHERE provinceid = ' . $provinceid . ' AND countryid=' . $countryid);
         if ($weight > 0) {
-            $sql = 'SELECT provinceid, weight FROM ' . $db_config['prefix'] . '_' . $module_data . '_province WHERE weight >' . $weight;
+            $sql = 'SELECT provinceid, weight FROM ' . NV_PREFIXLANG . '_' . $module_data . '_province WHERE weight >' . $weight;
             $result = $db->query($sql);
             while (list ($provinceid, $weight) = $result->fetch(3)) {
                 $weight --;
-                $db->query('UPDATE ' . $db_config['prefix'] . '_' . $module_data . '_province SET weight=' . $weight . ' WHERE provinceid=' . intval($provinceid));
+                $db->query('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_province SET weight=' . $weight . ' WHERE provinceid=' . intval($provinceid));
             }
         }
         $nv_Cache->delMod($module_name);
@@ -93,7 +93,7 @@ $error = array();
 $row['provinceid'] = $nv_Request->get_int('provinceid', 'post,get', 0);
 $row['countryid'] = $nv_Request->get_int('countryid', 'post,get', 0);
 
-$sql = 'SELECT * FROM ' . $db_config['prefix'] . '_' . $module_data . '_country WHERE status=1';
+$sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_country WHERE status=1';
 $array_country = $nv_Cache->db($sql, 'countryid', $module_name);
 if (! isset($array_country[$row['countryid']])) {
     Header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=country');
@@ -110,13 +110,13 @@ if ($nv_Request->isset_request('submit', 'post')) {
     if (empty($row['alias'])) {
         $row['alias'] = change_alias($row['title']);
         
-        $stmt = $db->prepare('SELECT COUNT(*) FROM ' . $db_config['prefix'] . '_' . $module_data . '_province WHERE provinceid != :provinceid AND alias = :alias');
+        $stmt = $db->prepare('SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_province WHERE provinceid != :provinceid AND alias = :alias');
         $stmt->bindParam(':provinceid', $row['provinceid'], PDO::PARAM_STR);
         $stmt->bindParam(':alias', $row['alias'], PDO::PARAM_STR);
         $stmt->execute();
         
         if ($stmt->fetchColumn()) {
-            $weight = $db->query('SELECT MAX(weight) FROM ' . $db_config['prefix'] . '_' . $module_data . '_province WHERE countryid=' . $row['countryid'])->fetchColumn();
+            $weight = $db->query('SELECT MAX(weight) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_province WHERE countryid=' . $row['countryid'])->fetchColumn();
             $weight = intval($weight) + 1;
             $row['alias'] = $row['alias'] . '-' . $weight;
         }
@@ -128,7 +128,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
         $error[] = $lang_module['error_required_province_countryid'];
     }
     
-    $count = $db->query('SELECT COUNT(*) FROM ' . $db_config['prefix'] . '_' . $module_data . '_province WHERE provinceid=' . $row['provinceid'])->fetchColumn();
+    $count = $db->query('SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_province WHERE provinceid=' . $row['provinceid'])->fetchColumn();
     if ($count > 0 and $row['provinceid'] == 0) {
         $error[] = $lang_module['error_required_provinceid_exist'];
     }
@@ -136,13 +136,13 @@ if ($nv_Request->isset_request('submit', 'post')) {
     if (empty($error)) {
         try {
             if (empty($row['provinceid'])) {
-                $stmt = $db->prepare('INSERT INTO ' . $db_config['prefix'] . '_' . $module_data . '_province (code, countryid, title, alias, type, weight) VALUES (:code, :countryid, :title, :alias, :type, :weight)');
+                $stmt = $db->prepare('INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_province (code, countryid, title, alias, type, weight) VALUES (:code, :countryid, :title, :alias, :type, :weight)');
                 
-                $weight = $db->query('SELECT max(weight) FROM ' . $db_config['prefix'] . '_' . $module_data . '_province WHERE countryid=' . $row['countryid'])->fetchColumn();
+                $weight = $db->query('SELECT max(weight) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_province WHERE countryid=' . $row['countryid'])->fetchColumn();
                 $weight = intval($weight) + 1;
                 $stmt->bindParam(':weight', $weight, PDO::PARAM_INT);
             } else {
-                $stmt = $db->prepare('UPDATE ' . $db_config['prefix'] . '_' . $module_data . '_province SET countryid = :countryid, code = :code, title = :title, alias = :alias, type = :type WHERE provinceid=' . $row['provinceid']);
+                $stmt = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_province SET countryid = :countryid, code = :code, title = :title, alias = :alias, type = :type WHERE provinceid=' . $row['provinceid']);
             }
             $stmt->bindParam(':code', $row['code'], PDO::PARAM_STR);
             $stmt->bindParam(':countryid', $row['countryid'], PDO::PARAM_STR);
@@ -162,7 +162,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
         }
     }
 } elseif ($row['provinceid'] > 0) {
-    $row = $db->query('SELECT * FROM ' . $db_config['prefix'] . '_' . $module_data . '_province WHERE provinceid=' . $row['provinceid'])->fetch();
+    $row = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_province WHERE provinceid=' . $row['provinceid'])->fetch();
     if (empty($row)) {
         Header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op);
         die();
@@ -185,7 +185,7 @@ if (! $nv_Request->isset_request('id', 'post,get')) {
     $page = $nv_Request->get_int('page', 'post,get', 1);
     $db->sqlreset()
         ->select('COUNT(*)')
-        ->from('' . $db_config['prefix'] . '_' . $module_data . '_province');
+        ->from('' . NV_PREFIXLANG . '_' . $module_data . '_province');
     $where = ' countryid=' . $row['countryid'];
     if (! empty($q)) {
         $where .= ' AND provinceid LIKE :q_provinceid OR title LIKE :q_title OR type LIKE :q_type ';
@@ -236,7 +236,7 @@ if ($show_view) {
     }
     $number = $page > 1 ? ($per_page * ($page - 1)) + 1 : 1;
     while ($view = $sth->fetch()) {
-        $view['count'] = $db->query('SELECT COUNT(*) FROM ' . $db_config['prefix'] . '_' . $module_data . '_district WHERE provinceid=' . $db->quote($view['provinceid']))
+        $view['count'] = $db->query('SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_district WHERE provinceid=' . $db->quote($view['provinceid']))
             ->fetchColumn();
         for ($i = 1; $i <= $num_items; ++ $i) {
             $xtpl->assign('WEIGHT', array(

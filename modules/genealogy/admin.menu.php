@@ -74,7 +74,7 @@ else
 	}
 }
 
-$allow_func = array( 'main', 'view', 'stop', 'publtime', 'waiting', 'declined', 're-published', 'genealogy', 'rpc', 'del_genealogy', 'alias', 'tagsajax', 'province' , 'ward' );
+$allow_func = array( 'main', 'view', 'stop', 'publtime', 'waiting', 'declined', 're-published', 'genealogy', 'rpc', 'del_genealogy', 'alias', 'tagsajax', 'country', 'province' , 'district', 'ward' );
 
 if( ! isset( $site_mods['cms'] ) )
 {

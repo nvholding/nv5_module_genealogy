@@ -9,7 +9,22 @@
  */
 if (! defined('NV_IS_FILE_ADMIN'))
     die('Stop!!!');
-
+//ajax 
+if ($nv_Request->isset_request('mod', 'post, get')) {
+	 $mod = $nv_Request->get_title('mod', 'get', '');
+	 if($mod == 'ajax'){
+		 $wardid = $nv_Request->get_int('wardid', 'post, get', 0);
+		$districtid = $nv_Request->get_int('districtid', 'get', 0);
+		$rows = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_ward WHERE districtid=' . $districtid);
+		 $html='';
+		 while ($row = $rows->fetch()){
+			 $html.='<option value="' . $row['wardid'] . '"> ' . $row['title'] . ' </option>';
+		 }
+		print($html);
+		die;
+	 }
+	
+}
 if ($nv_Request->isset_request('get_alias_title', 'post')) {
     $alias = $nv_Request->get_title('get_alias_title', 'post', '');
     $alias = change_alias($alias);
@@ -21,11 +36,11 @@ if ($nv_Request->isset_request('change_status', 'post, get')) {
     $wardid = $nv_Request->get_int('wardid', 'post, get', 0);
     $content = 'NO_' . $wardid;
     
-    $query = 'SELECT status FROM ' . $db_config['prefix'] . '_' . $module_data . '_ward WHERE wardid=' . $wardid;
+    $query = 'SELECT status FROM ' . NV_PREFIXLANG . '_' . $module_data . '_ward WHERE wardid=' . $wardid;
     $row = $db->query($query)->fetch();
     if (isset($row['status'])) {
         $status = ($row['status']) ? 0 : 1;
-        $query = 'UPDATE ' . $db_config['prefix'] . '_' . $module_data . '_ward SET status=' . intval($status) . ' WHERE wardid=' . $wardid;
+        $query = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_ward SET status=' . intval($status) . ' WHERE wardid=' . $wardid;
         $db->query($query);
         $content = 'OK_' . $wardid;
     }
@@ -42,7 +57,7 @@ if ($nv_Request->isset_request('delete_wardid', 'get') and $nv_Request->isset_re
     $districtid = $nv_Request->get_int('districtid', 'get', 0);
     $delete_checkss = $nv_Request->get_string('delete_checkss', 'get');
     if (! empty($wardid) and $delete_checkss == md5($wardid . NV_CACHE_PREFIX . $client_info['session_id'])) {
-        $db->query('DELETE FROM ' . $db_config['prefix'] . '_' . $module_data . '_ward  WHERE wardid = ' . $wardid);
+        $db->query('DELETE FROM ' . NV_PREFIXLANG . '_' . $module_data . '_ward  WHERE wardid = ' . $wardid);
         $nv_Cache->delMod($module_name);
         Header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op . '&provinceid=' . $provinceid . '&districtid=' . $districtid);
         die();
@@ -88,13 +103,13 @@ if ($nv_Request->isset_request('submit', 'post')) {
     if (empty($row['alias'])) {
         $row['alias'] = change_alias($row['title']);
         
-        $stmt = $db->prepare('SELECT COUNT(*) FROM ' . $db_config['prefix'] . '_' . $module_data . '_ward WHERE wardid != :wardid AND alias = :alias');
+        $stmt = $db->prepare('SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_ward WHERE wardid != :wardid AND alias = :alias');
         $stmt->bindParam(':wardid', $row['wardid'], PDO::PARAM_STR);
         $stmt->bindParam(':alias', $row['alias'], PDO::PARAM_STR);
         $stmt->execute();
         
         if ($stmt->fetchColumn()) {
-            $weight = $db->query('SELECT MAX(wardid) FROM ' . $db_config['prefix'] . '_' . $module_data . '_ward WHERE wardid=' . $row['wardid'] . ' AND districtid=' . $row['districtid'])->fetchColumn();
+            $weight = $db->query('SELECT MAX(wardid) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_ward WHERE wardid=' . $row['wardid'] . ' AND districtid=' . $row['districtid'])->fetchColumn();
             $weight = intval($weight) + 1;
             $row['alias'] = $row['alias'] . '-' . $weight;
         }
@@ -106,7 +121,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
         $error[] = $lang_module['error_required_districtid_districtid'];
     }
     
-    $count = $db->query('SELECT COUNT(*) FROM ' . $db_config['prefix'] . '_' . $module_data . '_ward WHERE wardid=' . $db->quote($row['wardid']))
+    $count = $db->query('SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_ward WHERE wardid=' . $db->quote($row['wardid']))
         ->fetchColumn();
     if ($count > 0 and $row['wardid'] == 0) {
         $error[] = $lang_module['error_required_wardid_exist'];
@@ -115,9 +130,9 @@ if ($nv_Request->isset_request('submit', 'post')) {
     if (empty($error)) {
         try {
             if (empty($row['wardid'])) {
-                $stmt = $db->prepare('INSERT INTO ' . $db_config['prefix'] . '_' . $module_data . '_ward (code, districtid, title, alias, type, location) VALUES (:code, :districtid, :title, :alias, :type, :location)');
+                $stmt = $db->prepare('INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_ward (code, districtid, title, alias, type, location) VALUES (:code, :districtid, :title, :alias, :type, :location)');
             } else {
-                $stmt = $db->prepare('UPDATE ' . $db_config['prefix'] . '_' . $module_data . '_ward SET code = :code, districtid = :districtid, title = :title, alias = :alias, type = :type, location = :location WHERE wardid=' . $row['wardid']);
+                $stmt = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_ward SET code = :code, districtid = :districtid, title = :title, alias = :alias, type = :type, location = :location WHERE wardid=' . $row['wardid']);
             }
             $stmt->bindParam(':code', $row['code'], PDO::PARAM_STR);
             $stmt->bindParam(':districtid', $row['districtid'], PDO::PARAM_INT);
@@ -139,13 +154,13 @@ if ($nv_Request->isset_request('submit', 'post')) {
     }
 } elseif ($row['wardid'] > 0) {
     $countryid = $row['countryid'];
-    $row = $db->query('SELECT * FROM ' . $db_config['prefix'] . '_' . $module_data . '_ward WHERE wardid=' . $row['wardid'])->fetch();
+    $row = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_ward WHERE wardid=' . $row['wardid'])->fetch();
     if (empty($row)) {
         Header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op);
         die();
     }
     $row['countryid'] = $countryid;
-    $row['provinceid'] = $db->query('SELECT provinceid FROM ' . $db_config['prefix'] . '_' . $module_data . '_district WHERE districtid=' . $row['districtid'])->fetchColumn();
+    $row['provinceid'] = $db->query('SELECT provinceid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_district WHERE districtid=' . $row['districtid'])->fetchColumn();
 } else {
     $row['code'] = '';
     $row['title'] = '';
@@ -165,7 +180,7 @@ if (! $nv_Request->isset_request('id', 'post,get')) {
     $page = $nv_Request->get_int('page', 'post,get', 1);
     $db->sqlreset()
         ->select('COUNT(*)')
-        ->from('' . $db_config['prefix'] . '_' . $module_data . '_ward');
+        ->from('' . NV_PREFIXLANG . '_' . $module_data . '_ward');
     
     if (! empty($q)) {
         $where .= ' AND ( wardid LIKE :q_wardid OR title LIKE :q_title OR type LIKE :q_type OR alias LIKE :q_alias OR location LIKE :q_location)';
@@ -221,7 +236,7 @@ if ($show_view) {
     $number = $page > 1 ? ($per_page * ($page - 1)) + 1 : 1;
     while ($view = $sth->fetch()) {
         $view['number'] = $number ++;
-        $view['count'] = $db->query('SELECT COUNT(*) FROM ' . $db_config['prefix'] . '_' . $module_data . '_ward WHERE wardid=' . $db->quote($view['wardid']))
+        $view['count'] = $db->query('SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_ward WHERE wardid=' . $db->quote($view['wardid']))
             ->fetchColumn();
         $xtpl->assign('CHECK', $view['status'] == 1 ? 'checked' : '');
         $view['link_edit'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $op . '&amp;provinceid=' . $row['provinceid'] . '&amp;districtid=' . $row['districtid'] . '&amp;wardid=' . $view['wardid'];

@@ -75,6 +75,7 @@
 						<td align="right" nowrap="nowrap"> {LANG.u_mother}: </td>
 						<td>
 						<select name="parentid2">
+						<option value="0" > Không biết </option>
 							<!-- BEGIN: parentid2 -->
 							<option value="{PARENTID2.id}" {PARENTID2.selected}> {PARENTID2.full_name} </option>
 							<!-- END: parentid2 -->
@@ -148,6 +149,14 @@
 						<td colspan="3">
 						<input style="width: 450px" name="burial" type="text" value="{DATA.burial}" maxlength="255" />
 						</td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td colspan="4">{LANG.hometext}
+						<br>
+						<br>
+						{HTMLHOMETEXT} </td>
 					</tr>
 				</tbody>
 				<tbody>

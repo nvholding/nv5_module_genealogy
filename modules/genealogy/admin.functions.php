@@ -63,6 +63,7 @@ $array_allowed_comm = array(
 
 define( 'NV_IS_FILE_ADMIN', true );
 require_once NV_ROOTDIR . '/modules/' . $module_file . '/global.functions.php';
+require_once NV_ROOTDIR . '/modules/' . $module_file . '/location.class.php';
 
 global $global_array_fam;
 $global_array_fam = array();

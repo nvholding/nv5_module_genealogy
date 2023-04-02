@@ -9,7 +9,7 @@
  */
 
 if( ! defined( 'NV_IS_MOD_GENEALOGY' ) ) die( 'Stop!!!' );
-if( ! defined( 'NV_MODULE_LOCATION' ) ){
+/* if( ! defined( 'NV_MODULE_LOCATION' ) ){
 	$contents = '<p class="note_fam">' . $lang_module['note_location'] . '</p>';
 	include NV_ROOTDIR . '/includes/header.php';
 	echo nv_admin_theme( $contents );
@@ -17,7 +17,7 @@ if( ! defined( 'NV_MODULE_LOCATION' ) ){
 	die();
 	
 	
-}
+} */
 if (defined('NV_IS_USER'))
 {
 	if( defined( 'NV_EDITOR' ) )
@@ -80,7 +80,9 @@ if (defined('NV_IS_USER'))
     $post['name1'] = $nv_Request->get_string('name1', 'post', '');
     $post['name2'] = $nv_Request->get_string('name2', 'post', '');
 
-    $content = $nv_Request->get_string('content', 'post', '');
+    $hometext = $nv_Request->get_string('hometext', 'post', '');
+    $post['hometext'] = defined('NV_EDITOR') ? nv_nl2br($hometext, '') : nv_nl2br(nv_htmlspecialchars(strip_tags($hometext)), '<br />');
+	$content = $nv_Request->get_string('content', 'post', '');
     $post['content'] = defined('NV_EDITOR') ? nv_nl2br($content, '') : nv_nl2br(nv_htmlspecialchars(strip_tags($content)), '<br />');
 
     $post['life'] = $nv_Request->get_int('life', 'post,get', 0);
@@ -137,7 +139,7 @@ if (defined('NV_IS_USER'))
 			$_sql = "INSERT INTO " . NV_PREFIXLANG . "_" . $module_data . "
 						( gid, parentid, parentid2, weight, lev, relationships, gender, status, anniversary_day, anniversary_mont, actanniversary, 
 				alias,full_name, code, name1, name2, 
-				birthday, dieday, life, burial, content, image, userid, add_time, edit_time) VALUES
+				birthday, dieday, life, burial, hometext, content, image, userid, add_time, edit_time) VALUES
 						 (" .  intval($post['gid'])  . ",
 						 " .  intval($post['parentid'])  . ",
 						 " .  intval($post['parentid2'])  . ",
@@ -158,6 +160,7 @@ if (defined('NV_IS_USER'))
 						 " . $db->quote($post['dieday_data'])  . ",
 						 " .  intval($post['life'])  . ",
 						 " . $db->quote($post['burial'])  . ",
+						 " . $db->quote($post['hometext'])  . ",
 						 " . $db->quote($post['content'])  . ",
 						 " . $db->quote($post['image'])  . ",
 						 " .  $db->quote($post['userid'])  . ",
@@ -261,7 +264,8 @@ if (defined('NV_IS_USER'))
         $post['weight'] = intval($maxweight) + 1;
 
     }
-
+	if (!empty($post['hometext']))
+        $post['hometext'] = nv_htmlspecialchars($post['hometext']);
     if (!empty($post['content']))
         $post['content'] = nv_htmlspecialchars($post['content']);
 
@@ -363,6 +367,15 @@ if (defined('NV_IS_USER'))
 
         $xtpl->parse('main.life');
     }
+	if( defined( 'NV_EDITOR' ) and nv_function_exists( 'nv_aleditor' ) )
+	{
+		$htmlhomehtml = nv_aleditor( 'hometext', '100%', '300px', $post['hometext'], 'Basic' );
+	}
+	else
+	{
+		$htmlhomehtml .= "<textarea class=\"textareaform\" name=\"hometext\" id=\"hometext\" cols=\"60\" rows=\"15\">" . $post['hometext']  . "</textarea>";
+	}
+	$xtpl->assign( 'HTMLHOMETEXT', $htmlhomehtml );
 	if( defined( 'NV_EDITOR' ) and nv_function_exists( 'nv_aleditor' ) )
 	{
 		$htmlbodyhtml = nv_aleditor( 'content', '100%', '300px', $post['content'], 'Basic' );

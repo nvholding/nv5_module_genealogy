@@ -380,18 +380,18 @@ $("#idtitle").change(function() {
 					return;
             };	
             $("select[name=districtid]").empty(); 
-			$.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=province&cityid=' + cityCode + '&districtid={rowcontent.districtid}', function(res) {
+			$.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=district&mod=ajax&provinceid=' + cityCode + '&districtid={rowcontent.districtid}', function(res) {
 				$("select[name=districtid]").append("<option value='-1'> {LANG.choose_district} </option>");
 				$("select[name=districtid]").append(res);	
 				$("select[name=wardid]").empty();
 				if( districtCode == -1) {
 					districtCode={rowcontent.districtid};
-					$.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ward&districtid='+districtCode+'&wardid={rowcontent.wardid}', function(res) {
+					$.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ward&mod=ajax&districtid='+districtCode+'&wardid={rowcontent.wardid}', function(res) {
 						$("select[name=wardid]").append("<option value> {LANG.choose_ward}  </option>");
 						$("select[name=wardid]").append(res);
 					});
 				}else{
-					$.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ward&districtid='+districtCode+'&wardid={rowcontent.wardid}', function(res) {
+					$.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ward&mod=ajax&districtid='+districtCode+'&wardid={rowcontent.wardid}', function(res) {
 						$("select[name=wardid]").append("<option value> {LANG.choose_ward}  </option>");
 					});
 				}					
@@ -409,7 +409,7 @@ $("#idtitle").change(function() {
             };
 			$("select[name=wardid]").empty();
 
-			$.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ward&districtid='+districtCode+'&wardid={rowcontent.wardid}', function(res) {
+			$.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ward&mod=ajax&districtid='+districtCode+'&wardid={rowcontent.wardid}', function(res) {
 				$("select[name=wardid]").append("<option value> {LANG.choose_ward}  </option>");
 				$("select[name=wardid]").append(res);
 			});
@@ -423,10 +423,10 @@ $("#idtitle").change(function() {
 		});
 	});
 </script>
-<script type="text/javascript" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/js/ui/jquery.ui.core.min.js"></script>
-<script type="text/javascript" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/js/ui/jquery.ui.menu.min.js"></script>
-<script type="text/javascript" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/js/ui/jquery.ui.autocomplete.min.js"></script>
-<script type="text/javascript" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/js/ui/jquery.ui.datepicker.min.js"></script>
+<script type="text/javascript" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/js/jquery-ui/jquery.ui.core.min.js"></script>
+<script type="text/javascript" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/js/jquery-ui/jquery.ui.menu.min.js"></script>
+<script type="text/javascript" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/js/jquery-ui/jquery.ui.autocomplete.min.js"></script>
+<script type="text/javascript" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/js/jquery-ui/jquery.ui.datepicker.min.js"></script>
 <script type="text/javascript" src="{NV_BASE_SITEURL}{NV_ASSETS_DIR}/js/language/jquery.ui.datepicker-{NV_LANG_INTERFACE}.js"></script>
 <script type="text/javascript" src="{NV_BASE_SITEURL}themes/admin_default/js/genealogy_content.js"></script>
 <!-- END:main -->
