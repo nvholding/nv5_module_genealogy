@@ -36,7 +36,7 @@ if( nv_user_in_groups( $global_array_fam[$fid]['groups_view'] ) )
 	$query = $db->query( 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_' . $fid . ' WHERE alias = "' . $alias_url.'"' );
 	
 	$news_contents = $query->fetch();
-
+die;
 	if(defined( 'NV_IS_ADMIN' ) OR ($user_info['userid'] == $news_contents['admin_id']))
 	{
 		
@@ -316,19 +316,47 @@ if( nv_user_in_groups( $global_array_fam[$fid]['groups_view'] ) )
 				$base_url_rewrite = nv_url_rewrite( NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $global_array_fam[$news_contents['fid']]['alias'] . '/' . $news_contents['alias'] . '/Manager' . $global_config['rewrite_exturl'], true );
 				$list_users = array();
 				$sqllistuser = $db->sqlreset()->query( 'SELECT * FROM ' . NV_PREFIXLANG . '_'. $module_data .' WHERE gid = "' . $news_contents['id'] . '" ORDER BY weight ASC' );
-
+				$Treejsons=array();
 				while($listu = $sqllistuser->fetch())
 				{
 					$lu=array();
 					$lu=$listu;
 					$lu['link']=nv_url_rewrite( NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $global_array_fam[$news_contents['fid']]['alias'] . '/' . $news_contents['alias'] .'/' . $alias_family_tree . '/' . $lu['alias'] . $global_config['rewrite_exturl'], true );
 					$list_users[$listu['parentid']][$listu['id']] = $lu;
+					
 							
 				}
+				foreach($list_users as $lprid => $tlus){
+					foreach ($tlus as $luid => $tlu){
+						$Treejsons[]=array(
+							"id"=>$tlu['id'],
+							"name"=>$tlu['full_name'],
+							"title"=>$tlu['name1'],
+							"birthday"=>$tlu['birthday'],
+							"image_list"=>$tlu['image'],
+							"orders"=>$tlu['weight'],
+							"parent_id"=>$lprid,
+							"married_with"=>($tlu['relationships'] == 2 )? $lprid : "",
+							"home_address"=>$tlu['burial'],
+							"gender"=>$tlu['gender'],
+							"child_of_second_married"=>($tlu['parientid2'] > 0 )? $tlu['parientid2'] : "",
+							"_image_list"=>"",
+							"phone_number"=>"",
+							"email_address"=>"",
+							"date_of_death"=>"",
+							"place_heaven"=>"",
+							"col_fix"=>$tlu['id'],
+							"has_child"=>1,
+							"_public_link"=>"\/my-tree?pid=js156958"
+						); 
+					}
+				}
+				print_r($Treejsons);die;
+				
 			}
 		}
 		elseif($news_contents['id'] > 0 AND $array_op[2]==$alias_family_tree AND $count_op == 4 AND $array_op[3]!='' )
-		{
+		{die;
 			$publtime =1;
 			$base_url_rewrite = nv_url_rewrite( NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $global_array_fam[$news_contents['fid']]['alias'] . '/' . $news_contents['alias'] .'/' . $alias_family_tree . '/' . $array_op[3] . $global_config['rewrite_exturl'], true );
 			$info_users = $db->sqlreset()->query( 'SELECT * FROM ' . NV_PREFIXLANG . '_'. $module_data .' WHERE gid = "' . $news_contents['id'] . '" AND alias="' . $array_op[3] . '" ORDER BY weight ASC' )->fetch();
@@ -691,7 +719,7 @@ if( nv_user_in_groups( $global_array_fam[$fid]['groups_view'] ) )
 					'link' => $base_url_rewrite
 				);
 				$contents = view_family( $news_contents, $list_users, $array_keyword, $content_comment );	
-		}
+		}die;
 		$id_profile_googleplus = $news_contents['gid'];
 		$page_title = $news_contents['title'];
 		$key_words = implode( ', ', $key_words );
