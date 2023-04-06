@@ -1,0 +1,538 @@
+body {
+    /*font-family: "Comic Sans MS", "Lucida Sans Unicode", sans-serif;*/
+    /*font-family: Verdana, Arial, Helvetica, sans-serif;*/
+    /*font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;*/
+    font-family: Calibri;
+    /*font-family: Arial, Baskerville, monospace;*/
+    /*font-family: Tahoma, Helvetica, Arial;*/
+    /*font-size: small;*/
+    /*background-color: lavender;*/
+}
+
+.root_svg{
+    background-color: white;
+}
+
+.root_svg {
+    /*border: 1px dashed #bbb;*/
+}
+.img_bg_node_svg{
+    font-size: smaller;
+    width: 100px;
+    margin: 10px;
+    display: inline-block;
+}
+
+.img_bg_node_svg img, .img_bg_banner img{
+    width: 100%;
+    border: 1px dotted gray;
+}
+
+
+
+
+.img_bg_banner{
+    font-size: smaller;
+    /*width: 280px;*/
+
+    margin: 5px;
+    display: inline-block;
+    text-align: center;
+}
+
+.img_bg_banner img{
+    width: 100%
+}
+
+
+.node_cont {
+    text-align: center;
+    border: 0px solid gray;
+    /*border-radius: 5px;*/
+    font-size: x-small;
+    padding: 4px 6px;
+    height: 124px;
+    font-family: Tahoma;
+    box-sizing: unset !important;
+    /*position: relative;*/
+}
+
+#dialog-select-background, #dialog-select-banner-background{
+    display: none;
+}
+
+
+button {
+    /*margin-top: 10px*/
+}
+
+.svg-pan-zoom_viewport {
+    background-color: lavenderblush;
+}
+
+.node_cont img {
+    margin-top: 5px;
+    /*width: 30px;*/
+    /*width: 80%;*/
+    max-height: 40px;
+}
+
+#title_dialog_node {
+    font-size: inherit;
+    margin-top:10px;
+}
+
+.node_edit_btn {
+    border: 2px solid white;
+    background-color: green;
+    padding: 2px 6px !important;
+    color: white;
+    font-size: 13px !important;
+    position: fixed;
+    float: right;
+    max-width: 27px;
+    bottom: 3px;
+    right: 1px;
+    border-radius: 14px !important;
+}
+
+.node_move_left_btn{
+    border: 2px solid white;
+    background-color: orangered;
+    padding: 2px 6px !important;
+    color: white;
+    font-size: 13px !important;
+    position: fixed;
+    max-width: 27px;
+    bottom: 60%;
+    left: -1%;
+    border-radius: 14px !important;
+    display: none;
+}
+
+.node_move_right_btn{
+    display: none;
+    border: 2px solid white;
+    background-color: orangered;
+    padding: 2px 6px !important;
+    color: white;
+    font-size: 13px !important;
+    position: fixed;
+    max-width: 27px;
+    bottom: 60%;
+    right: -1%;
+    border-radius: 14px !important;
+}
+
+.node_edit_btn_banner{
+    border: 2px solid white;
+    background-color: green;
+    padding: 4px 10px !important;
+    color: white;
+    font-size: 20px !important;
+    position: fixed;
+    display: none;
+    /*float: right;*/
+    max-width: 50px;
+    bottom: 1px;
+    right: 48%;
+    border-radius: 20px !important;
+}
+
+/*.node_cont:hover + .node_edit_btn {*/
+/*    display: block;*/
+/*    color: red;*/
+/*}*/
+
+.node_cont .node_edit_btn {
+    margin: 0 auto;
+    display: none;
+}
+
+.node_cont:hover .node_edit_btn {
+    text-align: center;
+    display: block;
+}
+
+.node_move_left_btn{
+    display: none;
+}
+
+/*.node_cont:hover .node_move_left_btn {*/
+/*    text-align: center;*/
+/*    display: block;*/
+/*}*/
+
+/*.node_cont:hover .node_move_right_btn {*/
+/*    text-align: center;*/
+/*    display: block;*/
+/*}*/
+
+.banner_tree_div .node_edit_btn {
+    /*display: block;*/
+    margin: 0 auto;
+    display: none;
+}
+
+
+.banner_tree_div:hover .node_edit_btn {
+    text-align: center;
+    display: block;
+}
+
+#svg_cont_node_banner_id:hover .node_edit_btn_banner {
+    display: block;
+}
+
+#svg_cont_node_banner_id:hover {
+    /*border: 1px dashed #ccc*/
+    background-color: #eee;
+    border-radius: 5px;
+}
+
+/*.svg_text_banner_name:hover .node_edit_btn_banner {*/
+/*    display: block;*/
+/*}*/
+
+/*#svg_text_path_banner_name:hover .node_edit_btn_banner{*/
+/*    display: block;*/
+/*}*/
+
+.img_new_node_blink {
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    display: none;
+    font-size: x-large;
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.node_img{
+    width: 80%; margin: 5px auto 1px auto;
+}
+
+.blink_me {
+    animation: blinker 1s linear infinite;
+}
+
+#dialog-node-add .input_node {
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}
+
+#dialog-node-add .input_node col * {
+    margin: 0px;
+}
+
+.input_node .label{
+    font-weight: bold;
+    /*margin-top: 6px;*/
+}
+
+.ui-dialog {
+    padding: 0px;
+}
+
+.ui-widget-header {
+    border: 0px
+}
+
+.lb_upload {
+    margin-top: 0px;
+    display: inline-block;
+    /*background-color: gray;*/
+    color: white;
+    /*padding: 4px 10px;*/
+    font-family: sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: small;
+}
+
+.lb_upload2 {
+    margin-top: 0px;
+    font-size: small;
+    display: inline-block;
+    background-color: gray;
+    color: white;
+    padding: 4px 10px;
+    font-family: sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#check_error_node {
+    font-size: small;
+    color: red;
+    font-weight: bold;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+#app_gp{
+    text-align: center;
+    /*margin: 1px 1px ;*/
+    /*margin-top : 60px;*/
+    /*width: 90%; */
+    /*height: 1000px; */
+    border: 0px solid black;
+}
+
+.main_cont{
+    margin-top: 1px;
+    padding: 0px;
+}
+
+.ui-dialog .ui-dialog-content{
+    padding-left: 18px;
+    padding-right: 18px;
+}
+.ui-dialog-titlebar {
+    /*display: none;*/
+}
+
+.view_more_prop{
+    /*float: right; */
+    font-size: smaller; color: blue;
+    cursor: pointer;
+}
+
+.btn_ctrl_svg1{
+    bottom: 12px;
+    background-color: white;
+    border: 1px solid gray;
+    width: 35px; height: 35px; border-radius: 50%;
+    position:absolute;
+    display:flex;
+    opacity:0.85;
+    font-size: larger;
+    justify-content: center;
+    align-items:center;
+}
+.menu_div {
+    color: white;
+}
+.menu_div a {
+    /*font-size: small;*/
+    /*font-weight: bold;*/
+    color: white;
+    text-decoration: none;
+}
+.menu_div {
+    width: 100%;
+    /*position: fixed;*/
+    /*height: 30px;*/
+    left: 0px;
+    top: 0px;
+    background-color: #3c4656;
+    padding: 8px
+}
+
+.one_tree {
+    clear: both;
+    margin: 10px
+}
+
+.btn_ctrl_svg1 img {
+    width: 70%;
+}
+
+.loader1 {
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid blue;
+    border-right: 5px solid  yellow;
+    border-bottom: 5px solid green;
+    border-left: 5px solid red;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    display: none;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.card{
+    background-color: #fdfdfd;
+    border: 1px solid #bbb
+
+}
+.card-body{
+    border: 0px solid #fdfdfd
+}
+
+.card:hover {
+    border: 1px solid green !important;
+    background: green;
+    color: white;
+
+}
+.card:hover .svg_icon_one_node{
+    filter: invert(1);
+}
+
+.card:hover a{
+    color: white;
+}
+
+.svg_home {
+    filter: invert(1);
+    /*filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);*/
+    margin-bottom: 5px;
+}
+
+
+.root_svg .border {
+    /*font-size: 1.6rem;*/
+    display: grid;
+    place-items: center;
+    /*min-height: 200px;*/
+    border: 8px solid;
+    padding: 8px;
+}
+
+.root_svg .linear-repeating {
+    border-width: 0px!important;
+    border-image: repeating-linear-gradient(45deg, turquoise, pink 4%) 1!important;
+}
+
+.banner_tree_div{
+    width: 800px ;
+    height: 150px;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    border: 0px solid #ccc; display: inline-block; padding: 20px 10px;
+    border-radius: 1px;
+    /*background-color: snow;*/
+
+}
+
+#dialog-edit-banner .change_number_btn{
+    border: 1px solid gray;
+    border-radius: 3px;
+    width: 25px;
+    height: 30px;
+    margin-left: 6px;
+}
+
+.ui-dialog .ui-dialog-titlebar-close{
+    border: 1px solid gray;
+    background:
+        linear-gradient(to top left,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) calc(50% - 0.8px),
+        rgba(0,0,0,1) 50%,
+        rgba(0,0,0,0) calc(50% + 0.8px),
+        rgba(0,0,0,0) 100%),
+        linear-gradient(to top right,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) calc(50% - 0.8px),
+        rgba(0,0,0,1) 50%,
+        rgba(0,0,0,0) calc(50% + 0.8px),
+        rgba(0,0,0,0) 100%);
+}
+
+.input_color_banner_tree {
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 30px;
+}
+
+.select_bg_radio{
+    border-radius: 0px;
+    background-color: #eee;
+    padding: 7px 10px 5px 10px; margin-top: -1px; text-align: center; position: fixed;  z-index: 10000
+}
+.select_bg_radio button{
+    background-color: royalblue;
+    color: white;
+    border-radius: 5px;
+    border: 0px solid white;
+}
+.select_bg_radio div{
+
+
+    display: inline-block;
+    /*background-color: lavender; */
+    margin-right: 2px; padding: 1px 5px;
+    /*margin-bottom: 1px;*/
+    margin-top: 0px;
+}
+
+.select_bg_radio label{
+    margin-bottom: 1px;
+}
+
+.input_node select {
+    border-radius: 2px;
+    min-height: 28px;
+}
+
+.text_shadow1 {
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    /*-webkit-text-stroke: 1px white;*/
+    /*text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,*/
+    /*1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;*/
+}
+
+.ui-dialog .ui-dialog-content{
+    padding-top: 1px!important;
+}
+
+.text2_green{
+    /*color: green*/
+}
+#dialog-node-add #new_title{
+    margin-top: 10px;
+
+}
+
+.node_title{
+    display: block;
+    font-style: italic;
+    font-size: smaller;
+    margin-top: 3px;
+}
+
+.node_name_one{
+    display: block;
+    margin-top: 3px;
+    /*clear: both;*/
+    /*overflow: hidden;*/
+    /*white-space: nowrap;*/
+    /*text-overflow: ellipsis;*/
+
+    /*display: -webkit-box;*/
+    /*-webkit-line-clamp: 1;*/
+    /*-webkit-box-orient: vertical;*/
+    /*overflow: hidden;*/
+}
+
+.node_birthday_one{
+    display: block;
+    margin-top: 2px;
+}
+
+#dialog-show-config {
+    font-size: smaller;;
+}

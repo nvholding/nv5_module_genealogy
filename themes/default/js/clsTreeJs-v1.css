@@ -1,0 +1,116 @@
+#tree_container > .real_node_item{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
+
+div.real_node_item {
+    color: green;
+    padding: 9px 6px 7px 15px;
+    border: 1px solid #ddd;
+    background-color: white;
+    font-size: small;
+    font-weight: bold;
+}
+
+div.real_node_item .node_extra_info_before_name{
+    vertical-align: middle;
+}
+
+div.real_node_item .node_extra_info_after_name{
+    vertical-align: middle;
+}
+div.real_node_item .node_name{
+    vertical-align: middle;
+}
+
+div.real_node_item input[type=radio] {
+    margin-right: 10px;
+}
+div.real_node_item input[type=checkbox] {
+    margin-right: 10px;
+}
+
+div.real_node_item :hover {
+    background-color: #eee;
+}
+
+div.empty_node_pad {
+    padding: 2px;
+    display: block;
+    /*background-color: gray;*/
+    height: 3px;
+    /*border: 1px solid green;*/
+    margin: 1px 0px;
+}
+
+span.toggle_node {
+    display: inline-block;
+    margin-right: 5px;
+    font-weight: bolder;
+    /*font-size: large;*/
+    font-size: small;
+    font-family: Arial;
+}
+
+span.menu_one_node {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.modal_dialog_edit_node .name_desc{
+    /*font-weight: bold;*/
+    font-family: Tahoma, Geneva, sans-serif;
+}
+
+/* Modal Content/Box */
+.modal_dialog_edit_node {
+    /*display: none;*/
+    position: fixed;
+    background-color: #fefefe;
+    padding: 10px;
+    padding-bottom: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 300px;
+    z-index: 10000;
+}
+
+/* The Close Button */
+.modal_dialog_edit_node .close_btn {
+    color: #aaa;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 28px;
+    font-weight: bold;
+    /*margin: 5px;*/
+
+}
+
+.close_btn:hover,
+.close_btn:focus {
+    cursor: pointer;
+}
+
+.modal_dialog_edit_node .btn_create{
+    margin: 5px 5px;
+    width: 80%;
+    padding: 1px 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+
+}
+
+.modal_dialog_edit_node .new_name{
+    margin: 10px 5px;
+    width: 80%;
+    padding: 1px 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.cls_root_tree{
+    padding: 15px;
+}
